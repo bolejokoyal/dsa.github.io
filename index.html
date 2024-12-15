@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Code</title>
+</head>
+
+<body>
+
+    <h1>Queue Java Code</h1>
+    <pre id="queue-code">
+        package Queue;
+
+        class Queue {
+            int front, rear, capacity;
+            int[] queue;
+
+            // Constructor to initialize the queue
+            public Queue(int size) {
+                capacity = size;
+                queue = new int[capacity];
+                front = 0;
+                rear = -1;
+            }
+
+            // Enqueue operation: Adds an element to the queue
+            void enqueue(int value) {
+                if (rear == capacity - 1) {
+                    System.out.println("Queue is full, cannot enqueue " + value);
+                } else {
+                    queue[++rear] = value;
+                    System.out.println(value + " enqueued to the queue");
+                }
+            }
+
+            // Peek Front operation: Shows the front element of the queue
+            void peekFront() {
+                if (front > rear) {
+                    System.out.println("Queue is empty!");
+                } else {
+                    System.out.println("Front element is: " + queue[front]);
+                }
+            }
+
+            // Display operation: Displays all elements in the queue
+            void display() {
+                if (front > rear) {
+                    System.out.println("Queue is empty!");
+                } else {
+                    System.out.print("Queue elements: ");
+                    for (int i = front; i lessthaneq rear; i++) {
+                        System.out.print(queue[i] + " ");
+                    }
+                    System.out.println();
+                }
+            }
+        }
+
+        public class OrdinaryQueue {
+            public static void main(String[] args) {
+                // Create a queue of size 5
+                Queue queue = new Queue(5);
+
+                queue.peekFront();
+                // Perform operations
+                queue.enqueue(10);
+                queue.enqueue(20);
+                queue.enqueue(30);
+                queue.enqueue(40);
+
+                // Peek Front element
+                queue.peekFront();
+
+                // Display all elements in the queue
+                queue.display();
+            }
+        }
+    </pre>
+
+    <h1>Balanced Parentheses Java Code</h1>
+    <pre id="balanced-parentheses-code">
+        package Stack;
+
+        import java.util.Stack;
+
+        public class BalancedParentheses {
+            // Method to check if parentheses are balanced
+            static boolean areParenthesesBalanced(String expression) {
+                Stack<Character> stack = new Stack&lt;&gt;();
+
+                // Iterate over each character in the expression
+                for (int i = 0; i &lt; expression.length(); i++) {
+                    char c = expression.charAt(i);
+
+                    // Push opening parentheses to the stack
+                    if (c == '(' || c == '{' || c == '[') {
+                        stack.push(c);
+                    }
+                    // If a closing parenthesis is found
+                    else if (c == ')' || c == '}' || c == ']') {
+                        // Check if stack is empty or parentheses don't match
+                        if (stack.isEmpty()) {
+                            return false;
+                        }
+                        char top = stack.pop();
+                        if (!isMatchingPair(top, c)) {
+                            return false;
+                        }
+                    }
+                }
+
+                // If stack is empty at the end, parentheses are balanced
+                return stack.isEmpty();
+            }
+
+            // Helper method to check if a pair of parentheses match
+            static boolean isMatchingPair(char open, char close) {
+                return (open == '(' && close == ')') ||
+                       (open == '{' && close == '}') ||
+                       (open == '[' && close == ']');
+            }
+
+            public static void main(String[] args) {
+                String expression = "{[()]}"; // Example expression
+                if (areParenthesesBalanced(expression)) {
+                    System.out.println("The parentheses are balanced.");
+                } else {
+                    System.out.println("The parentheses are NOT balanced.");
+                }
+            }
+        }
+    </pre>
+
+    <pre id="stack-code">
+        package Stack;
+
+        class Stack {
+            private int maxSize;  // Maximum size of the stack
+            private int top;      // Pointer to the top element of the stack
+            private int[] stack;  // Array to store stack elements
+
+            // Constructor to initialize the stack with a given size
+            public Stack(int size) {
+                maxSize = size;
+                stack = new int[maxSize];
+                top = -1;  // Stack is initially empty
+            }
+
+            // Push operation: Adds an element to the top of the stack
+            public void push(int value) {
+                if (top &lt; maxSize - 1) {
+                    stack[++top] = value;
+                    System.out.println(value + " pushed to stack");
+                } else {
+                    System.out.println("Stack Overflow: Cannot push " + value);
+                }
+            }
+
+            // Pop operation: Removes the top element from the stack
+            public int pop() {
+                if (top == -1) {
+                    System.out.println("Stack Underflow: Stack is empty");
+                    return -1;  // Return a sentinel value when the stack is empty
+                } else {
+                    int poppedValue = stack[top--];
+                    return poppedValue;
+                }
+            }
+
+            // Peek operation: Returns the top element without removing it
+            public int peek() {
+                if (top == -1) {
+                    System.out.println("Stack is empty");
+                    return -1;
+                } else {
+                    return stack[top];
+                }
+            }
+
+            // Display operation: Displays all elements in the stack
+            public void display() {
+                if (top == -1) {
+                    System.out.println("Stack is empty");
+                } else {
+                    System.out.print("Stack elements: ");
+                    for (int i = 0; i lessthaneq top; i++) {
+                        System.out.print(stack[i] + " ");
+                    }
+                    System.out.println();
+                }
+            }
+        }
+
+        public class OrdinaryStack {
+            public static void main(String[] args) {
+                // Create a stack with a maximum size of 5
+                Stack stack = new Stack(5);
+
+                // Test the stack operations
+                stack.push(10);
+                stack.push(20);
+                stack.push(30);
+                stack.push(40);
+                stack.push(50);
+                stack.push(60);  // This should show stack overflow
+
+                stack.display();
+
+                System.out.println("Top element is: " + stack.peek()); // Peek the top element
+
+                System.out.println("Popped element: " + stack.pop()); // Pop the top element
+                System.out.println("Popped element: " + stack.pop()); // Pop the next element
+
+                stack.display();
+            }
+        }
+
+    </pre>
+
+    <pre id="bubble">
+        package Sorting;
+
+        import java.util.Arrays;
+        
+        public class Bubble {
+        
+            static void bubbleSort(int arr[]) {
+        
+                for (int i = 0; i &lt; arr.length; i++) {
+                    boolean swapped = false;
+                    for (int j = 1; j  &lt; arr.length - 1; j++) {
+                        if (arr[j]  &lt; arr[j - 1]) {
+                            int temp = arr[j];
+                            arr[j] = arr[j - 1];
+                            arr[j - 1] = temp;
+                            swapped = true;
+                        }
+                    }
+                    if (!swapped) {
+                        break;
+                    }
+                }
+            }
+        
+            public static void main(String[] args) {
+                System.out.println("Sorted Arr");
+                int arr[] = { 5, 4, 3, 2, 1, 7 };
+                bubbleSort(arr);
+                System.out.println(Arrays.toString(arr));
+        
+            }
+        }
+        
+    </pre>
+
+    <pre id="insertion">
+        package Sorting;
+
+        import java.util.Arrays;
+        
+        public class Insertion {
+        
+            private static void swap(int[] arr, int j, int i) {
+                int temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
+            }
+        
+            static int[] insertionSort(int arr[]) {
+                for (int i = 0; i &lt; arr.length - 1; i++) {
+                    for (int j = i + 1; j > 0; j--) {
+                        if (arr[j]  &lt; arr[j - 1]) {
+                            swap(arr, j, j - 1);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                return arr;
+            }
+        
+            public static void main(String[] args) {
+                int[] arr = { 12, 11, 13, 5, 6 };
+                System.out.println("Unsorted array: " + Arrays.toString(arr));
+                arr = insertionSort(arr);
+                System.out.println("Sorted array: " + Arrays.toString(arr));
+            }
+        }
+    </pre>
+
+    <pre id="selection">
+        package Sorting;
+
+        public class Selection {
+
+            static int[] selectionSort(int arr[]) {
+                for (int i = 0; i &lt; arr.length - 1; i++) {
+                    int min = i;
+                    for (int j = i + 1; j &lt; arr.length; j++) {
+                        if (arr[j] &lt; arr[min]) {
+                            min = j;
+                        }
+                    }
+                    int temp = arr[i];
+                    arr[i] = arr[min];
+                    arr[min] = temp;
+                }
+                return arr;
+            }
+
+            static void printArray(int[] arr){
+                for (int val : arr) {
+                    System.out.print(val+ " ");
+                }
+                System.out.println();
+            }
+
+            public static void main(String[] args) {
+                int[] arr = { 64, 25, 12, 22, 11 };
+
+                System.out.print("Original array: ");
+                printArray(arr);
+
+                int[] a = selectionSort(arr);
+
+                System.out.print("Sorted array: ");
+                printArray(a);
+            }
+        }
+
+    </pre>
+
+    <pre id="shell">
+        package Sorting;
+
+        public class Shellsort {
+
+            public static void Shellsort(int[] arr){
+                int n=arr.length;
+                for(int gap=n/2;gap>=1;gap/=2)
+                {
+                    for(int j=gap;j&lt;n;j++){
+                        for(int i=j-gap;i greaterthaneq 0;i-=gap){
+                            if(arr[i+gap]>arr[i]){
+                                break;
+                            }
+                            else{
+                                int temp=arr[i];
+                                arr[i]=arr[i+gap];
+                                arr[i+gap]=temp;
+                            }
+                        }
+                    }
+                }
+            }
+            public static void main(String[] args) {
+                    int[] arr={25,29,15,19,31,7,9,5,2};
+                    Shellsort(arr);
+                    for (int elem : arr) {
+                            System.out.print(elem + " ");
+                    }
+            }
+            
+        }
+
+    </pre>
+
+    <pre id="postfix">
+        package Stack;
+
+        import java.util.Stack;
+
+        public class PostfixEvaluator {
+            // Method to evaluate a postfix expression
+            static int evaluatePostfix(String expression) {
+                // Stack to store operands
+                Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+
+                // Iterate over each character in the expression
+                for (int i = 0; i &lt; expression.length(); i++) {
+                    char c = expression.charAt(i);
+
+                    // If the character is a space, skip it
+                    if (c == ' ') continue;
+
+                    // If the character is a digit, push it to the stack
+                    if (Character.isDigit(c)) {
+                        stack.push(Character.getNumericValue(c)); // Convert char to integer
+                    } 
+                    // If the character is an operator, pop two elements from the stack
+                    else {
+                        int operand2 = stack.pop(); // Right operand
+                        int operand1 = stack.pop(); // Left operand
+
+                        // Perform the operation and push the result back to the stack
+                        switch (c) {
+                            case '+':
+                                stack.push(operand1 + operand2);
+                                break;
+                            case '-':
+                                stack.push(operand1 - operand2);
+                                break;
+                            case '*':
+                                stack.push(operand1 * operand2);
+                                break;
+                            case '/':
+                                stack.push(operand1 / operand2);
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Invalid operator: " + c);
+                        }
+                    }
+                }
+
+                // The final result will be at the top of the stack
+                return stack.pop();
+            }
+
+            public static void main(String[] args) {
+                String postfixExpression = "23*54*+9-"; // Example expression
+                System.out.println("Postfix Expression: " + postfixExpression);
+                int result = evaluatePostfix(postfixExpression);
+                System.out.println("Result: " + result);
+            }
+        }
+
+    </pre>
+
+    <pre id="bst">
+        package Tree;
+
+        import java.util.Scanner;
+
+        class Node {
+            int value;
+            Node left;
+            Node right;
+
+            public Node(int value) {
+                this.value = value;
+                left = null;
+                right = null;
+            }
+        }
+
+        public class BinarySearchTree {
+            private Node root;
+
+            public BinarySearchTree() {
+                root = null;
+            }
+
+            // insert
+            public void insert(int value) {
+                Node newNode = new Node(value);
+                if(root == null){
+                    root = newNode;
+                }else{
+                    insertRecursive(root, newNode);
+                }
+            }
+
+            
+            //Rec func:
+            private void insertRecursive(Node currentNode, Node newNode){
+                if (newNode.value &lt; currentNode.value) {
+                    if(currentNode.left == null){
+                        currentNode.left = newNode;
+                    }else{
+                        insertRecursive(currentNode.left, newNode);
+                    }
+                }else{
+                    if(currentNode.right == null){
+                        currentNode.right = newNode;
+                    }else{
+                        insertRecursive(currentNode.right, newNode);
+                    }
+                }
+            }
+
+            // Method to display the binary search tree using inorder traversal
+            public void display() {
+                displayRecursive(root);
+            }
+
+            //Method to display:
+            private void displayRecursive(Node node){
+                if(node != null){
+                    displayRecursive(node.left);
+                    System.out.println(node.value + " ");
+                    displayRecursive(node.right);
+                }
+            }
+
+            //Max value:
+            public int findMax(){
+                return findMaxRecursive(root);
+            }
+
+            private int findMaxRecursive(Node node){
+                if(node.right == null){
+                    return node.value;
+                }else{
+                    return findMaxRecursive(node.right);
+                }
+            }
+
+            public static void main(String[] args) {
+                BinarySearchTree bst = new BinarySearchTree();
+                bst.insert(50);
+                bst.insert(30);
+                bst.insert(20);
+                bst.insert(40);
+                bst.insert(70);
+                bst.insert(60);
+                bst.insert(80);
+
+                System.out.println("Binary Search Tree:");
+                bst.display();
+
+                System.out.println("\nMaximum value in the binary search tree: " + bst.findMax());
+
+            }
+
+        }
+
+    </pre>
+
+    <pre id="linear">
+        package Searching;
+
+        public class Linear {
+
+            static int linearSearch(int arr[], int target) {
+                if (arr.length == 0) {
+                    return -1;
+                }
+                for (int i = 0; i &lt; arr.length; i++) {
+                    int element = arr[i];
+                    if (element == target) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+
+            public static void main(String[] args) {
+                int[] nums = { 34, 5, 6, 3, 78, 32, 1 };
+                int target = 12;
+                int ans = linearSearch(nums, target);
+                System.out.println(ans);
+            }
+        }
+
+    </pre>
+
+    <pre id="binary">
+        package Searching;
+
+        import java.util.Scanner;
+
+        public class Binary {
+
+            public static int binarySearch(int arr[], int target) {
+                int start = 0;
+                int end = arr.length - 1;
+                while (start lessthaneq end) {
+                    // fin mid
+                    int mid = start + (end - start) / 2;
+                    if (arr[mid] == target) {
+                        return mid;
+                    }
+
+                    if (target > arr[mid]) {
+                        start = mid + 1;
+                    } else {
+                        end = mid - 1;
+                    }
+                }
+                return -1;
+            }
+
+            public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Enter size of array: ");
+                int n = sc.nextInt();
+                int[] arr = new int[n];
+
+                System.out.println("Enter the elements in sorted order");
+                for (int i = 0; i &lt; n; i++) {
+                arr[i] = sc.nextInt();
+                }
+
+                System.out.println("Enter the target: ");
+                int target = sc.nextInt();
+
+                int res = binarySearch(arr, target);
+
+                if (res != -1) {
+                System.out.println("Element found at index: " + res);
+                } else {
+                System.out.println("Element not found");
+                }
+
+                // int arr[] = { 2, 4, 6, 8, 10, 12, 15, 165 };
+                // int target = 12;
+                // int ans = binarySearch(arr, target);
+                // System.out.println("elment is found at index " + ans);
+            }
+        }
+
+    </pre>
+
+    <pre id="sll">
+        package LinkedList;
+
+        public class LinkedList {
+        
+             class Node {
+                int data;
+                Node next;
+        
+                public Node(int data) {
+                    this.data = data;
+                    this.next = null;
+                }
+            }
+        
+            public static Node head;
+            public static Node tail;
+            public static int size;
+        
+            public void addFirst(int data) {
+                Node newNode = new Node(data);
+                size++;
+                if (head == null) {
+                    head = tail = newNode;
+                    return;
+                }
+                newNode.next = head;
+                head = newNode;
+            }
+        
+            public void addLast(int data) {
+                Node newNode = new Node(data);
+                size++;
+                if (tail == null) {
+                    addFirst(data);
+                    return;
+                }
+                tail.next = newNode;
+                tail = newNode;
+            }
+        
+            public void print() {
+                if (head == null) {
+                    System.out.println("Empty LinkedList");
+                    return;
+                }
+                Node temp = head;
+                while (temp != null) {
+                    System.out.print(temp.data + "--&gt;");
+                    temp = temp.next;
+                }
+                System.out.println("null");
+            }
+        
+            public void add(int index, int data) {
+                if (index == 0) {
+                    addFirst(data);
+                    return;
+                }
+                if (index == size) {
+                    addLast(data);
+                    return;
+                }
+                Node newNode = new Node(data);
+                size++;
+                Node temp = head;
+                int i = 0;
+                while (i &lt; index - 1) {
+                    temp = temp.next;
+                    i++;
+                }
+                newNode.next = temp.next;
+                temp.next = newNode;
+            }
+        
+            // Remove first node
+            public int removeFirst() {
+                if (size == 0) {
+                    System.out.println("LinkedList is empty");
+                    return Integer.MIN_VALUE;
+                } else if (size == 1) {
+                    int val = head.data;
+                    head = tail = null;
+                    size = 0;
+                    return val;
+                }
+                int val = head.data;
+                head = head.next;
+                size--;
+                return val;
+            }
+        
+            // Remove last node
+            public int removeLast() {
+                if (size == 0) {
+                    System.out.println("LinkedList is empty");
+                    return Integer.MIN_VALUE;
+                } else if (size == 1) {
+                    int val = head.data;
+                    head = tail = null;
+                    size = 0;
+                    return val;
+                }
+                Node prev = head;
+                for (int i = 0; i &lt; size - 2; i++) {
+                    prev = prev.next;
+                }
+                int val = prev.next.data;
+                prev.next = null;
+                tail = prev;
+                size--;
+                return val;
+            }
+        
+            // Remove from between
+            public int removeFromBetween(int index) {
+                if (index &lt; 0 || index >= size) {
+                    System.out.println("Invalid index");
+                    return Integer.MIN_VALUE;
+                }
+                if (index == 0) {
+                    return removeFirst();
+                }
+                if (index == size - 1) {
+                    return removeLast();
+                }
+                Node prev = head;
+                for (int i = 0; i &lt; index - 1; i++) {
+                    prev = prev.next;
+                }
+                int val = prev.next.data;
+                prev.next = prev.next.next;
+                size--;
+                return val;
+            }
+        
+            public static void main(String[] args) {
+                LinkedList ll = new LinkedList();
+                ll.addFirst(1);
+                ll.print();
+                ll.addFirst(2);
+                ll.print();
+                ll.addFirst(3);
+                ll.print();
+        
+                ll.add(2, 9);
+                ll.print();
+        
+                ll.addLast(4);
+                ll.print();
+                ll.addLast(6);
+                ll.print();
+                System.out.println("Size: " + ll.size);
+        
+                ll.removeFirst();
+                ll.print();
+        
+                ll.removeLast();
+                ll.print();
+        
+                ll.removeFromBetween(2);
+                ll.print();
+        
+                System.out.println("Size after removing from between: " + ll.size);
+            }
+        }
+        
+    </pre>
+
+    <pre id="cll">
+        package LinkedList;
+public class CircularLinkedList {
+
+    public static class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node head;
+    private Node tail;
+    private int size;
+
+      
+    
+    public void addFirst(int data) {
+        Node newNode = new Node(data);
+        size++;
+        if (head == null) {
+            head = tail = newNode;
+            tail.next = head; // Point the tail to the head to form a circle
+            return;
+        }
+        newNode.next = head;
+        head = newNode;
+        tail.next = head; // Update tail's next pointer to point to the new head
+    }
+
+
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+        size++;
+        if (head == null) {
+            head = tail = newNode;
+            tail.next = head; // Point the tail to the head to form a circle
+            return;
+        }
+        tail.next = newNode;
+        tail = newNode;
+        tail.next = head; // Update the tail's next pointer to point to the head
+    }
+
+
+    public void print() {
+        if (head == null) {
+            System.out.println("Circular Linked List is empty");
+            return;
+        }
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " --&gt; ");
+            temp = temp.next;
+        } while (temp != head);
+        System.out.println("(back to head)");
+    }
+
+
+    public int removeFirst() {
+        if (head == null) {
+            System.out.println("Circular Linked List is empty");
+            return Integer.MIN_VALUE;
+        }
+        int val = head.data;
+        if (head == tail) { // If there's only one node
+            head = tail = null;
+        } else {
+            head = head.next;
+            tail.next = head; // Update the tail's next pointer to the new head
+        }
+        size--;
+        return val;
+    }
+
+
+    public int removeLast() {
+        if (head == null) {
+            System.out.println("Circular Linked List is empty");
+            return Integer.MIN_VALUE;
+        }
+        int val = tail.data;
+        if (head == tail) { // If there's only one node
+            head = tail = null;
+        } else {
+            Node temp = head;
+            while (temp.next != tail) {
+                temp = temp.next; // Traverse to the second-last node
+            }
+            temp.next = head; // Update second-last node's next pointer to head
+            tail = temp;      // Update the tail to second-last node
+        }
+        size--;
+        return val;
+    }
+
+    // Remove a node from a specific position
+    public int removeFromBetween(int index) {
+        if (index &lt; 0 || index >= size) {
+            System.out.println("Invalid index");
+            return Integer.MIN_VALUE;
+        }
+        if (index == 0) {
+            return removeFirst();
+        }
+        if (index == size - 1) {
+            return removeLast();
+        }
+        Node prev = head;
+        for (int i = 0; i &lt; index - 1; i++) {
+            prev = prev.next; // Traverse to the node before the one to be removed
+        }
+        int val = prev.next.data;
+        prev.next = prev.next.next; // Bypass the node to be removed
+        size--;
+        return val;
+    }
+
+    public static void main(String[] args) {
+        CircularLinkedList cll = new CircularLinkedList();
+
+        // Adding nodes
+        cll.addFirst(1);
+        cll.addFirst(2);
+        cll.addLast(3);
+        cll.addLast(4);
+        cll.print(); // Output: 2 --&gt; 1 --&gt; 3 --&gt; 4 --&gt; (back to head)
+
+        // Remove operations
+        System.out.println("Removed First: " + cll.removeFirst());
+        cll.print(); // Output: 1 --&gt; 3 --&gt; 4 --&gt; (back to head)
+
+        System.out.println("Removed Last: " + cll.removeLast());
+        cll.print(); // Output: 1 --&gt; 3 --&gt; (back to head)
+
+        cll.addLast(5);
+        cll.addLast(6);
+        cll.print(); // Output: 1 --&gt; 3 --&gt; 5 --&gt; 6 --&gt; (back to head)
+
+        System.out.println("Removed from index 1: " + cll.removeFromBetween(1));
+        cll.print(); // Output: 1 --&gt; 5 --&gt; 6 --&gt; (back to head)
+    }
+}
+
+    </pre>
+
+    <pre id="dll">
+        package LinkedList;
+
+public class DoublyLinkedList {
+
+    Node head;
+
+    public class Node {
+        int val;
+        Node next;
+        Node prev;
+
+        public Node(int val) {
+            this.val = val;
+        }
+
+        public Node(int val, Node next, Node prev) {
+            this.val = val;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+
+    public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        node.prev = null;
+        if (head != null) {
+            head.prev = node;
+        }
+        head = node;
+    }
+
+    public void display() {
+        Node node = head;
+        Node last = null;
+        while (node != null) {
+            System.out.print(node.val + "--&gt; ");
+            last = node;
+            node = node.next;
+        }
+        System.out.println("END");
+
+        System.out.println("Print in rev");
+        while (last != null) {
+            System.out.print(last.val + "--&gt; ");
+            last = last.prev;
+        }
+        System.out.println("START");
+    }
+
+    public static void main(String[] args) {
+        DoublyLinkedList dll = new DoublyLinkedList();
+        dll.insertFirst(3);
+        dll.insertFirst(2);
+        dll.insertFirst(8);
+        dll.insertFirst(17);
+
+        dll.display();
+
+    }
+}
+
+    </pre>
+
+    <pre id="matrix">
+        package Graph;
+
+import java.util.Scanner;
+
+public class AdjacencyMatrixGraph {
+    private int[][] adjacencyMatrix; // Matrix to store graph edges
+    private int vertices; // Number of vertices
+
+    // Constructor
+    public AdjacencyMatrixGraph(int vertices) {
+        this.vertices = vertices;
+        adjacencyMatrix = new int[vertices][vertices]; // Initialize matrix with 0s
+    }
+
+    // Method to add an edge (undirected graph)
+    public void addEdge(int source, int destination) {
+        if (source >= 0 && source &lt; vertices && destination >= 0 && destination &lt; vertices) {
+            adjacencyMatrix[source][destination] = 1;
+            adjacencyMatrix[destination][source] = 1; // For undirected graph
+        } else {
+            System.out.println("Invalid edge!");
+        }
+    }
+
+    // Method to display the adjacency matrix
+    public void displayMatrix() {
+        System.out.println("Adjacency Matrix:");
+        for (int i = 0; i &lt; vertices; i++) {
+            for (int j = 0; j &lt; vertices; j++) {
+                System.out.print(adjacencyMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input: Number of vertices
+        System.out.print("Enter the number of vertices: ");
+        int vertices = scanner.nextInt();
+
+        // Create a graph
+        AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(vertices);
+
+        // Input: Number of edges
+        System.out.print("Enter the number of edges: ");
+        int edges = scanner.nextInt();
+
+        System.out.println("Enter the edges (source and destination):");
+        for (int i = 0; i &lt; edges; i++) {
+            int source = scanner.nextInt();
+            int destination = scanner.nextInt();
+            graph.addEdge(source, destination);
+        }
+
+        // Display the adjacency matrix
+        graph.displayMatrix();
+
+        scanner.close();
+    }
+}
+
+    </pre>
+
+    <pre id="bfs">
+        package Graph;
+
+import java.util.*;
+
+public class BFSGraphTraversal {
+    private int vertices; // Number of vertices in the graph
+    private LinkedList&lt;Integer&gt;[] adjacencyList; // Adjacency list for the graph
+
+    // Constructor to initialize the graph
+    public BFSGraphTraversal(int vertices) {
+        this.vertices = vertices;
+        adjacencyList = new LinkedList[vertices];
+        for (int i = 0; i &lt; vertices; i++) {
+            adjacencyList[i] = new LinkedList&lt;&gt;();
+        }
+    }
+
+    // Method to add an edge to the graph
+    public void addEdge(int source, int destination) {
+        adjacencyList[source].add(destination);
+        adjacencyList[destination].add(source); // For an undirected graph
+    }
+
+    // Method to perform BFS traversal
+    public void bfs(int startVertex) {
+        boolean[] visited = new boolean[vertices]; // Track visited vertices
+        Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;(); // Queue for BFS traversal
+
+        // Mark the start vertex as visited and enqueue it
+        visited[startVertex] = true;
+        queue.add(startVertex);
+
+        System.out.println("BFS Traversal starting from vertex " + startVertex + ":");
+
+        while (!queue.isEmpty()) {
+            // Dequeue a vertex from the queue and print it
+            int currentVertex = queue.poll();
+            System.out.print(currentVertex + " ");
+
+            // Get all adjacent vertices of the dequeued vertex
+            for (int neighbor : adjacencyList[currentVertex]) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true; // Mark as visited
+                    queue.add(neighbor); // Enqueue the adjacent vertex
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input: Number of vertices
+        System.out.print("Enter the number of vertices: ");
+        int vertices = sc.nextInt();
+
+        // Create a graph
+        BFSGraphTraversal graph = new BFSGraphTraversal(vertices);
+
+        // Input: Number of edges
+        System.out.print("Enter the number of edges: ");
+        int edges = sc.nextInt();
+
+        System.out.println("Enter the edges (source and destination):");
+        for (int i = 0; i &lt; edges; i++) {
+            int source = sc.nextInt();
+            int destination = sc.nextInt();
+            graph.addEdge(source, destination);
+        }
+
+        // Input: Start vertex for BFS
+        System.out.print("Enter the start vertex for BFS: ");
+        int startVertex = sc.nextInt();
+
+        // Perform BFS traversal
+        graph.bfs(startVertex);
+
+        sc.close();
+    }
+}
+
+    </pre>
+</body>
+
+</html>
